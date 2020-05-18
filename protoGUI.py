@@ -1,5 +1,5 @@
 from tkinter import *
-from recursion import *
+from protoVEB import *
 import os
 
 app = Tk()
