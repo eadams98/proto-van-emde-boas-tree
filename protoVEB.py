@@ -86,7 +86,7 @@ for x in range(low):
 
 class Veb:
 
-    def __init__(self, universe, bitVector, index):
+    def __init__(self, universe, bitVector, index, relation = 0): #relation for max and min
         #local variables to recursion depth level
         '''
         if len(index) == 0:
@@ -102,6 +102,7 @@ class Veb:
         self.globalMin = None
         self.ptr = None
         self.end = True
+        self.relation = relation
 
         self.universe = universe
 
@@ -132,10 +133,10 @@ class Veb:
             #self.ptr = [Veb(low, bitVector)]*low
             self.ptr = [None]*low
 
-            for idx in range(len(self.ptr)):
+            for enum, idx in enumerate(range(len(self.ptr))):
                 cpyIndex = copy.deepcopy(index)
                 cpyIndex.append((idx,low))
-                self.ptr[idx] = Veb(low, bitVector, cpyIndex)
+                self.ptr[idx] = Veb(low, bitVector, cpyIndex,low*enum+self.relation)
                 if 1 in self.ptr[idx].summary:
                     self.summary[idx] = 1
             print('summary at break by ', cpyIndex,': ', self.summary)
@@ -172,13 +173,13 @@ class Veb:
 
     ######### class methods ##############
 
-    def maximum(self):
+    def maximum(self): #SEE IF I CAN RECONVERT TO RECURSIVE METHOD
         #base case
         if self.universe == 2:
             if self.data[0] == 1:
-                return 0
+                return 0 + self.relation
             elif self.data[1] == 1:
-                return 1
+                return 1 + self.relation
             else:
                 return -1
 
@@ -194,15 +195,16 @@ class Veb:
                 return -1
             else:
                 position = self.ptr[index].maximum()
-                return index * self.low + position
+                #return index * self.low + position
+                return position
 
-    def minimum(self):
+    def minimum(self): #SEE IF I CAN RECONVERT TO RECURSIVE METHOD
         #base case
         if self.universe == 2:
             if self.data[0] == 1:
-                return 0
+                return 0 + self.relation
             elif self.data[1] == 1:
-                return 1
+                return 1 + self.relation
             else:
                 return -1
 
@@ -217,7 +219,8 @@ class Veb:
                 return -1
             else:
                 position = self.ptr[index].minimum()
-                return index * self.low + position
+                #return index * self.low + position
+                return position
 
     def successor(self, element): # FLAWWED LOGIC (FUNCTION INCOMPLETE)
         #base case
