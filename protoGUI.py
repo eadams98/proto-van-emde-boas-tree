@@ -1,5 +1,5 @@
 from tkinter import *
-from protoVEB import *
+from recursion import *
 import os
 
 app = Tk()
@@ -92,7 +92,7 @@ def visual(canvas, vebs, indexPtrIds, layers, partitions, depth, location):
                 lambda event, l=layers, d=depth-1, c=canvas, loc=location:
                 back(event, c, l, d, loc)  
         )
-        up = canvas.create_text(mid+50,y1+half/2, text= 'Up')
+        up = canvas.create_text(mid+50,y1+half/2, text= 'Up to depth '+str(depth-1))
         objects.add(up)
         
 
@@ -110,9 +110,11 @@ def visual(canvas, vebs, indexPtrIds, layers, partitions, depth, location):
         # SIMPLE MATH....
         x1 = 100+current                      # Top X - THIS IS FINE
         if depth != 0:
+            print('depth!')
             y1 = 0+(depth*100) + shove_down              # Top Y - SEEMS FINE
-            y2 = (depth*100) + half + shove_down             # Bottom Y - 
-            yPrime = 2*(depth*100) + shove_down              # BOTTOM-BOTTOM: 
+            y2 = (depth*100) + 50 + shove_down             # Bottom Y - 
+            yPrime = (depth*100) + 100 + shove_down             # Bottom Y - 
+            #yPrime = 2*(depth*100) + shove_down              # BOTTOM-BOTTOM: 
         else:
             y1 = 0 + shove_down
             y2 = 50 + shove_down
@@ -154,9 +156,17 @@ def visual(canvas, vebs, indexPtrIds, layers, partitions, depth, location):
 
     # LEGEND - key
     key = canvas.create_rectangle(50, pos+20+shove_down, 75, pos+45+shove_down, fill = 'white')
+    Max = canvas.create_text(62.5,pos+shove_down+32.5, text= veb.maximum())
+    MaxText = canvas.create_text(62.5,pos+shove_down+52, text='max')
     objects.add(key)
-    key = canvas.create_rectangle(10, pos+20+shove_down, 35, pos+45+shove_down, fill = color)
+    objects.add(Max)
+    objects.add(MaxText)
+    key = canvas.create_rectangle(10, pos+20+shove_down, 35, pos+45+shove_down, fill = 'white')
+    Min = canvas.create_text(22.5,pos+shove_down+32.5, text= veb.minimum())
+    MinText = canvas.create_text(22.5,pos+shove_down+52, text= 'min')
     objects.add(key)
+    objects.add(Min)
+    objects.add(MinText)
     #input(str(depth))
     #print(indexPtrIds)
 
@@ -186,9 +196,9 @@ def run(): # CURRENTLY BAD (every run just stacks another canvas on top of curre
         vebs = tup[1]
         
         global canvasHeight
-        canvasHeight = int(input('canvas Height (500 recommended): ')) #500 TAKE INPUT FROM USER
+        canvasHeight = 500 #int(input('canvas Height (500 recommended): ')) #500 TAKE INPUT FROM USER
         global canvasWidth
-        canvasWidth = int(input('cavas Width (1000 recommended): '))#1000 TAKE INPUT FROM USER
+        canvasWidth = 1000 #int(input('cavas Width (1000 recommended): '))#1000 TAKE INPUT FROM USER
         canvas = Canvas(app, width = canvasWidth, height = canvasWidth, background = 'AntiqueWhite3')
         #canvas.pack()
         canvas.grid(row=3)
