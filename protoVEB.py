@@ -1,88 +1,8 @@
 from math import *
-from random import *
+#from random import *
 import copy
 
-# MAKE UNI AN EXPONENT OF 2 FOR TEST PURPOSES
-# just so each bitvector is evenly split up
-
-def getHigh(element):
-    return floor(element/sqrt(u)) # FIX
-
-def getLow(element):
-    return element % sqrt(u) # FIX
-
-Universe = [4,16,256,65536,4294967297] #possible universe sizes. Anything bigger will probably crash
-
-def generateBitVector(universe):
-    
-    """
-    powerOfTwo = 2
-    print('universe: ', universe)
-    while powerOfTwo < universe:
-        powerOfTwo *= 2
-        print(powerOfTwo)
-    bitVector = [0]*powerOfTwo
-
-    for x in range(universe):
-        num = randrange(0,100,1)
-        if num > 89:
-            bitVector[x] = 1
-
-    print('bit: ', bitVector, len(bitVector), '\n')
-    return bitVector
-    """
-    for twoTower in Universe:
-        if twoTower >= universe:
-            bitVector = [0]*twoTower
-            for x in range(universe):
-                num = randrange(0,100,1)
-                if num > 89:
-                    bitVector[x] = 1
-
-            print('bit: ', bitVector, len(bitVector), '\n')
-            return twoTower,bitVector
-
-    return "ERROR"
-
-# lookup:   floor(x/sqrt(uni))
-# spot:     x mod sqrt(uni)
-
-
-#universe = int(input('please input a number that is an exponent of 2 (recommend 65536): '))
-'''
-low = floor(sqrt(universe))
-bitVector = [0]*universe
-summary = [0]*low
-
-for x in range(len(bitVector)):
-    num = randrange(0,100,1)
-    if num > 89:
-        bitVector[x] = 1
-#print(self.bitVector)
-
-for summaryChunk in range(low):
-    
-    for bitInChunk in range(low):
-        
-        if bitVector[(low * summaryChunk) + bitInChunk] == 1:
-            summary[summaryChunk] = 1
-            break
-'''
-
-'''
-visual to make sure it worked
-'''
-
-# not too helpful to see, below this one is much better
-#print('summary: ', summary)
-#print('bit: ', bitVector, '\n')
-
-'''
-for x in range(low):
-    print('summary[', x, ']: ', summary[x])
-    print('bitVector[', (low*x), ':', (low*x)+low-1, ']: ', bitVector[(low * x):(low * x) + low ], '\n')
-'''
-
+"""Veb data structure and it's associated methods and variables"""
 
 class Veb:
 
@@ -129,6 +49,8 @@ class Veb:
 
         # ptr to smaller ones
         if universe > 2:
+            low = int(low)
+            print (low)
             self.summary = [0]*low
             #self.ptr = [Veb(low, bitVector)]*low
             self.ptr = [None]*low
@@ -312,33 +234,9 @@ class Veb:
 #print('depth 1')
 #print(test.summary)
 
-def recursiveLook(veb,depth=1):
-    #if veb.ptr:
-        print('depth: ' + str(depth))
-        if veb.ptr: # if not == None
-            print(len(veb.ptr),veb.summary)
-            for idx,x in enumerate(veb.ptr):
-                #print(x.summary)
-                recursiveLook(x,depth+1)
-        else:
-            print(len(veb.data), veb.summary)
 
-def getPartitions(veb):
 
-    temp = []
-    vebs = []
-    go = True
-    while(go):
 
-        print(veb.low)
-        temp.append(veb.low)
-        vebs.append(veb)
-        if(veb.end):
-            veb = veb.ptr[0]
-        else:
-            go = False
-    print('partitions: ', temp)
-    return temp, vebs
 
 if __name__ == '__main__':
     # TESTING PURPOSES #

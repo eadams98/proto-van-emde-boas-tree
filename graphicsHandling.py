@@ -1,11 +1,9 @@
-from tkinter import *
-from protoVEB import *
 import os
 import protoHelperFunctions as helper
-
-
-""" Graphics handling below (NOTE: move to graphicsHandling.py) """
-
+from protoVEB import *
+"""
+Definitions
+"""
 def create_window(given_Tk):
     window = Toplevel(given_Tk)
     print('done')
@@ -209,20 +207,3 @@ def run(): # CURRENTLY BAD (every run just stacks another canvas on top of curre
         #canvas.create_rectangle(50,0,500,500, fill ='black')
     except ValueError:
         print("That's not a valid integer. Please enter a valid integer.")
-
-"""
-GUI Builder
-"""
-app = Tk()
-app.title("VEB toy")
-canvasHeight = canvasWidth = 0
-
-label_universe = Label(app, text="Enter an integer (2^x = #):")
-label_universe.grid(row=0)
-
-entry_universe = Entry(app)
-universe = Button(app, text="integer", command= run)
-entry_universe.grid(row=1,column=0)
-universe.grid(row=1, column=1)
-
-app.mainloop()
