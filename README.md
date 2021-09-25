@@ -20,6 +20,8 @@ Tkinter elements are all handled in this file. This file call upon protoVeb clas
 
 You can give the size of the bit vector you want and the backend will handle the rest. Essential if the size of your bit vector doesn't match an allowable universe size (Tower of 2: universe = 2^2^k) the bit vector will be extended to match this size. Your give bit vector value will be used to let this bit vector know which indicies to populate. It will start from 0 and go up to the number you indicated. Weather a indicies gets a 0 or 1 is dependent on a probabilistic value
 
+Users can click the boxes containing the words down or up to traverse the recursive VEB structure. The min and max will change to reflect the correct scope. 
+
 command line: `python(2 or 3) protoGUI.py`
 
 ### Start Screen
